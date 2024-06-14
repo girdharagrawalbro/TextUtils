@@ -19,6 +19,17 @@ export default function App() {
     });
     setText(newText);
   };
+  const handletoCopy = () => {
+    var vartext = document.getElementById("myBox");
+    vartext.select();
+    navigator.clipboard.writeText(vartext.value);
+    alert("Text Copied to Clipboard");
+  };
+
+  const handleExtraSpace = () => {
+    let newText = text.split(/[ ]+/);
+    setText(newText, join(" "));
+  };
 
   const handleOnChange = (event) => {
     console.log("Onchage");
@@ -36,7 +47,7 @@ export default function App() {
         <h3 className="my-3">Enter text to analyze</h3>
         <textarea
           className="form-control"
-          id="about"
+          id="myBox"
           rows="5"
           name="about"
           value={text}
@@ -44,7 +55,7 @@ export default function App() {
           onChange={handleOnChange}
         />
       </div>
-      <div className="container d-flex gap-2 my-3">
+      <div className="container d-flex flex-wrap gap-2 my-3">
         <button className="btn btn-primary" onClick={handleUpClick}>
           To Upper Case
         </button>
@@ -54,12 +65,18 @@ export default function App() {
         <button className="btn btn-primary" onClick={handleTitleCase}>
           To Title Case
         </button>
+        <button className="btn btn-primary" onClick={handletoCopy}>
+          Copy to Clipboard
+        </button>
+        <button className="btn btn-primary" onClick={handleExtraSpace}>
+          Remove Extra Spaces
+        </button>
       </div>
       <div className="container my-3">
         <h3>Your text summery</h3>
         <p>
-          <b> {text.split(" ").length} </b> Words and <b>{text.length}</b>{" "}
-          characters
+          <b> {text.split(" ").filter().length} </b> Words and{" "}
+          <b>{text.length}</b> characters
         </p>
         <p>
           <b>{0.008 * text.split(" ").length}</b> minutes take to read
