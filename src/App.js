@@ -75,11 +75,24 @@ export default function App() {
       <div className="container my-3">
         <h3>Your text summery</h3>
         <p>
-          <b> {text.split(" ").filter().length} </b> Words and{" "}
-          <b>{text.length}</b> characters
+          <b>
+            {" "}
+            {
+              text.split(" ").filter((element) => {
+                return element.length !== 0;
+              }).length
+            }{" "}
+          </b>{" "}
+          Words and <b>{text.length}</b> characters
         </p>
         <p>
-          <b>{0.008 * text.split(" ").length}</b> minutes take to read
+          <b>
+            {0.008 *
+              text.split(" ").filter((element) => {
+                return element.length !== 0;
+              }).length}
+          </b>{" "}
+          minutes take to read
         </p>
         <h4>Preview</h4>
         <p>{text}</p>
